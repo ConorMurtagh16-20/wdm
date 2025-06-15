@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cart - WDM Studios</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header>
+    <div class="top-bar">OUT OF STOCK ITEMS MAY BE REFUNDED.</div>
+    <div class="main-header">
+      <a href="index.html"><img src="logo.png" alt="WDM Logo" class="logo" /></a>
+      <div class="cart-section">
+        <input type="text" placeholder="Search" class="search-input" />
+        <span class="cart-count">Cart (<span id="cart-count">0</span>)</span>
+        <a href="checkout.html" class="checkout-link">Check Out</a>
+      </div>
+    </div>
+  </header>
+
+  <aside class="sidebar">
+    <ul class="nav-links">
+      <li><a href="#">Account</a></li>
+      <li><a href="#">New</a></li>
+      <li><a href="#">T-Shirts</a></li>
+      <li><a href="#">Tops / Jerseys</a></li>
+      <li><a href="#">Sweatshirts</a></li>
+      <li><a href="#">Jackets</a></li>
+      <li><a href="#">Loungewear</a></li>
+      <li><a href="#">Bottoms</a></li>
+      <li><a href="#">Denim</a></li>
+      <li><a href="#">Hats</a></li>
+      <li><a href="#">Bags</a></li>
+      <li><a href="#">Accessories</a></li>
+      <li><a href="#">Womens</a></li>
+      <li><a href="#">Newsletter</a></li>
+      <li><a href="#">Shipping Policy</a></li>
+      <li><a href="#">Terms of Service</a></li>
+    </ul>
+  </aside>
+
+  <main class="cart-page">
+    <div class="cart-container">
+      <h1>Cart</h1>
+      <table class="cart-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th></th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody id="cart-items">
+          <!-- Injected by JS -->
+        </tbody>
+      </table>
+
+      <div class="cart-summary">
+        <p><strong>Subtotal:</strong> <span class="subtotal-amount">€0.00</span></p>
+        <p><em>Shipping & taxes calculated at checkout</em></p>
+        <button class="secondary-btn" onclick="window.location.href='index.html'">Continue Shopping</button>
+        <label class="tos-check">
+          <input type="checkbox" id="tos-check" required /> I agree to the terms and conditions
+        </label>
+        <label for="contact-info">How should we contact you? (Discord / Instagram / Email)</label><br>
+<input type="text" id="contact-info" placeholder="e.g. @wdmclo or user#1234" required />
+
+        <button class="checkout-btn" onclick="window.location.href='checkout.html'">CHECK OUT</button>
+
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Copyright © 2025, WDM STUDIOS.</p>
+  </footer>
+
+  <script src="cart.js"></script>
+
+  <!-- 🧠 Live cart count from localStorage -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      document.getElementById("cart-count").textContent = cart.length;
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Thank You - WDM Studios</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      background-color: #000;
+      color: #fcd116;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 12px;
+      line-height: 1.6;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .confirmation {
+      text-align: center;
+      max-width: 500px;
+    }
+
+    h1 {
+      font-size: 14px;
+      color: #fcd116;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 12px;
+      margin-bottom: 25px;
+    }
+
+    .email-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    input[type="email"] {
+      padding: 6px 10px;
+      font-size: 12px;
+      border: none;
+      outline: none;
+      width: 220px;
+      background-color: #111;
+      color: #fcd116;
+      border: 1px solid #fcd116;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .btn {
+      background-color: #a00;
+      color: #fcd116;
+      font-size: 11px;
+      padding: 6px 12px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      margin: 5px 0;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    .footer-note {
+      margin-top: 30px;
+      font-size: 10px;
+      color: #fcd116;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="confirmation">
+    <h1>THANK YOU FOR YOUR ORDER</h1>
+    <p>Your order has been sent. We'll hit you back soon with payment & shipping info.</p>
+
+    <div class="email-form">
+      <label for="email">Enter your email / Instagram / Discord:</label>
+      <input type="email" id="email" placeholder="example@mail.com or @insta or discord#0000" />
+      <button class="btn" onclick="submitEmail()">SUBMIT</button>
+      <a href="index.html" class="btn">GO BACK HOME</a>
+
+    </div>
+
+    <p class="footer-note">WDM STUDIOS. A COLLECTION FOR THE COLLECTIVE.</p>
+  </div>
+
+  <script>
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    if (cart.length > 0) {
+      const message = {
+        content: `🧾 **New WDM Order Received**\n\n` + cart.map((item, i) =>
+          `**Item ${i + 1}:** ${item.name}\nSize: ${item.size}\nQty: ${item.quantity}`
+        ).join('\n\n') + `\n\n📦 **Total Items:** ${cart.reduce((sum, item) => sum + item.quantity, 0)}`
+      };
+
+      fetch("https://discord.com/api/webhooks/1383615123243139124/c7JGSs1K5YOknzjKq7MW3e-IokfkCaohQ3QIp8S_RZpdFXRc8oTMaJYWq7K5bqRvVt8C", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(message)
+      }).catch(err => console.error("Cart webhook failed:", err));

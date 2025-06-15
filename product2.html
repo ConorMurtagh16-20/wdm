@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WDM GOLD TOOTH TEE - WDM Studios</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header>
+    <div class="top-bar">OUT OF STOCK ITEMS MAY BE REFUNDED.</div>
+    <div class="main-header">
+      <a href="index.html"><img src="logo.png" alt="WDM Logo" class="logo" /></a>
+      <div class="cart-section">
+        <input type="text" placeholder="Search" class="search-input" />
+        <a href="cart.html" class="cart-count">Cart (0)</a>
+        <a href="checkout.html" class="checkout-link">Check Out</a>
+      </div>
+    </div>
+  </header>
+
+  <aside class="sidebar">
+    <ul class="nav-links">
+      <li><a href="#">Account</a></li>
+      <li><a href="#">New</a></li>
+      <li><a href="#">T-Shirts</a></li>
+      <li><a href="#">Tops / Jerseys</a></li>
+      <li><a href="#">Sweatshirts</a></li>
+      <li><a href="#">Jackets</a></li>
+      <li><a href="#">Loungewear</a></li>
+      <li><a href="#">Bottoms</a></li>
+      <li><a href="#">Denim</a></li>
+      <li><a href="#">Hats</a></li>
+      <li><a href="#">Bags</a></li>
+      <li><a href="#">Accessories</a></li>
+      <li><a href="#">Womens</a></li>
+      <li><a href="#">Newsletter</a></li>
+      <li><a href="#">Shipping Policy</a></li>
+      <li><a href="#">Terms of Service</a></li>
+    </ul>
+  </aside>
+
+  <main class="product-page">
+    <div class="product-container">
+      <div class="product-images">
+        <img id="mainProductImage" src="wdm-teeArtboard-2.png" alt="Front View" class="main-img" />
+        <div class="thumbs">
+          <img src="wdm-teeArtboard-2.png" alt="Front" class="thumb" onclick="updateMainImage(this)" />
+          <img src="wdm-teeArtboard-2.5.png" alt="Back" class="thumb" onclick="updateMainImage(this)" />
+        </div>
+      </div>
+
+      <div class="product-details">
+        <h1>WDM GOLD TOOTH TEE</h1>
+        <p class="price">$3,500</p>
+
+        <label for="size">Size</label>
+        <select id="size" name="size">
+          <option value="">-- Select Size --</option>
+          <option value="small">SMALL</option>
+          <option value="medium">MEDIUM</option>
+          <option value="large">LARGE</option>
+        </select>
+
+        <button class="add-to-cart">ADD TO CART</button>
+
+        <ul class="product-specs">
+          <li>• 240GSM 100% COTTON</li>
+          <li>• CLASSIC BOX-FIT TEE</li>
+          <li>• GOLD TOOTH GRAPHIC DETAILING</li>
+          <li>• PUFF PRINT FRONT & BACK</li>
+          <li>• DOUBLE-NEEDLE STITCHING</li>
+          <li>• PRE-SHRUNK</li>
+          <li>• TRUE TO SIZE – BOXED RELAXED FIT</li>
+          <li><a href="#">SIZE GUIDE</a></li>
+          <li><a href="#">SHIPPING POLICY</a></li>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Copyright © 2025, WDM STUDIOS.</p>
+  </footer>
+
+  <script>
+    function updateMainImage(thumb) {
+      const mainImg = document.getElementById("mainProductImage");
+      mainImg.src = thumb.src;
+      mainImg.alt = thumb.alt;
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const addToCartBtn = document.querySelector(".add-to-cart");
+      const sizeSelect = document.getElementById("size");
+      const cartCountEl = document.querySelector(".cart-count");
+
+      const currentCart = JSON.parse(localStorage.getItem("cart")) || [];
+      cartCountEl.textContent = `Cart (${currentCart.length})`;
+
+      addToCartBtn.addEventListener("click", () => {
+        const selectedSize = sizeSelect.value;
+
+        if (!selectedSize) {
+          alert("Please select a size.");
+          return;
+        }
+
+        const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        const newItem = {
+          name: "WDM GOLD TOOTH TEE",
+          price: 150,
+          size: selectedSize,
+          img: "wdm-teeArtboard-2.png",
+          quantity: 1
+        };
+
+        existingCart.push(newItem);
+        localStorage.setItem("cart", JSON.stringify(existingCart));
+
+        addToCartBtn.textContent = "VIEW CART";
+        addToCartBtn.style.backgroundColor = "#0f0";
+        addToCartBtn.style.color = "#000";
+        addToCartBtn.style.fontWeight = "bold";
+
+        addToCartBtn.onclick = () => {
+          window.location.href = "cart.html";
+        };
+
+        cartCountEl.textContent = `Cart (${existingCart.length})`;
+      });
+    });
+  </script>
+
+</body>
+</html>
